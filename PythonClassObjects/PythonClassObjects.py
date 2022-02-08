@@ -21,6 +21,7 @@ print(student2.check_pass_or_fail())
 class Customer:
     customerid_public = 0
     _customerid_protectd = 0
+    __customerid_private = 0
     def __init__(self, name,id=0):
         self._customerid_private=id
         self._customerid_protectd = id +1
@@ -28,20 +29,20 @@ class Customer:
         self.__customername=name
     def printid(self):
         print("Inside Print Customer ID")
-        print(self._customerid_private)
+        print(self.__customerid_private)
 
 class RegularCustomer(Customer):
-    def __init__(self, id=0, name=None, dis=0):
-        super().__init__(id,name)
+    def __init__(self, name, id=None, dis=0):
+        super().__init__(name,id)
         self.__discount=dis
 
-customer1 = Customer("John",2)
-#customer1.printid()
+customer1 = RegularCustomer("John",2)
+customer1.printid()
 customer1.customerid_public = 5
 print(customer1.customerid_public)
 customer1._customerid_protectd = 10
 print(customer1._customerid_protectd)
-#print(customer1._customerid_private)
+#print(customer1.__customerid_private)
 
 
 #Multiple inheritence
@@ -57,16 +58,17 @@ class mother:
         print("mother's money")
 class son(father, mother):
     pass
-class daugther(mother, father): 
+class daughter(mother, father): 
     pass
 
 john = son()
-mary = daugther()
+mary = daughter()
 john.land()
 john.money()
 john.jewels()
 mary.jewels()
 mary.money()
+
 
 #Aggregation
 
@@ -126,18 +128,18 @@ print(equiTriangle.calculateArea())
 regularPentagon = regularPolygon(5,9)
 print(regularPentagon.calculateArea())
 
+'''
 # Class DIR and Help 
 class arithmetic:
     _avg = 0
     publicKey = 101
     def __dir__(self):
-        This is dummy DIR declaration
+        '''This is dummy DIR declaration'''
         return("_avg","publicKey")
     
     def this_dummy_func():
-        This function is dummy
+        '''This function is dummy'''
         pass
 myObject = arithmetic()
 print(dir(myObject))
 print(help(myObject))
-'''
